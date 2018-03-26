@@ -9,10 +9,10 @@ import java.io.FileNotFoundException;
 
 public class FileReader
 {
-	private String fileName;
-	private File myFile; //global access
-	private Scanner myScanner;
-	private String line;
+	String fileName;
+	File myFile; //global access
+	Scanner myScanner;
+	String line;
 		
 	public FileReader(String fileName)
 	{

@@ -1,7 +1,13 @@
 package com.JavaAssignment.code;
 
-public class SearchEngine 
+public class SearchEngine
 {
-	//attributes - to be continued
+	//attributes
 	
+	
+	//constructors
+	public SearchEngine()
+	{
+		
+	}
 }

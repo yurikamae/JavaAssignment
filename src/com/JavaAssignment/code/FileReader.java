@@ -21,21 +21,21 @@ public class FileReader
 		
 	public void openFile()
 	{
-		File myFile = new File(fileName);
+		File myFile = new File("searchwords.txt");
 	}	
 	
 	public String scanFile()
 	{
 		try
 		{
-			myScanner = new Scanner(myFile);
+			Scanner myScanner = new Scanner(myFile);
 			line = myScanner.nextLine();
 		}
 		catch(FileNotFoundException fileName)
 		{
 			System.out.println("file not found");
 		}
-		
+	
 		return line;
 	}
 }

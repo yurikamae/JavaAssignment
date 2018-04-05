@@ -18,17 +18,17 @@ import javax.swing.JOptionPane;
 public class ScreenGui extends JFrame implements ActionListener
 {
 	//attributes
-	JButton searchButton, historyButton, clearHistoryButton;
-	JTextField searchBox; //this is where the text will be entered
-	JTextArea searchResults; //this area will display search results
+	private JButton searchButton, historyButton, clearHistoryButton;
+	private JTextField searchBox; //this is where the text will be entered
+	private JTextArea searchResults; //this area will display search results
 	
-	public ArrayList<SearchEngine> Search = new ArrayList<SearchEngine>(10);
+	ArrayList<SearchEngine> Search = new ArrayList<SearchEngine>();
 	
 	//constructors
 	public ScreenGui(String title)
 	{
 		super(title);
-		setSize(500,500);
+		setSize(400,500);
 		setLayout(new FlowLayout());
 		
 		searchBox = new JTextField();
@@ -57,29 +57,32 @@ public class ScreenGui extends JFrame implements ActionListener
 		setVisible(true);
 	}
 
-	//ActionListener method
 	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	//ActionListener method
+	/*@Override
 	public void actionPerformed(ActionEvent event)
 	{
 		if(event.getSource() == searchButton) //this button will display search results
 		{
 			//PART NOT FINISHED YET
-			Search.add(searchTerm);
-			JOptionPane.showMessageDialog(this, "You searched for: " + searchTerm);
+			//SearchEngine s1 = new SearchEngine(searchBox.getText());
+			//Search.add(s1);
+			//JOptionPane.showMessageDialog(this, "You searched for: " + s1);
 			//display search results
 		}
 		else if(event.getSource() == historyButton) //this button will display search history
 		{
-			//display history button
 			for(SearchEngine element : Search)
-			{
 				searchResults.append(element.toString());
-			}
 		}
-		else if(event.getSource() == clearHistoryButton)
+		else if(event.getSource() == clearHistoryButton) //this button will clear the search history
 		{
 			searchResults.setText(null);
 			Search.clear();
-		}
+		}*/
 	}
-}

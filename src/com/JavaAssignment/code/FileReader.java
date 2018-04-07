@@ -1,5 +1,5 @@
 /*
- * FileReader class which will read text files for search engine
+ * FileReader class which will read text file for search engine
  */
 package com.JavaAssignment.code;
 
@@ -9,33 +9,35 @@ import java.io.FileNotFoundException;
 
 public class FileReader
 {
-	String fileName;
+	File fileName;
 	File myFile; //global access
 	Scanner myScanner;
 	String line;
 		
-	public FileReader(String fileName)
+	public FileReader(File fileName)
 	{
 		this.fileName = fileName;
 	}
 		
 	public void openFile()
 	{
-		File myFile = new File("searchwords.txt");
+		fileName = new File("searchwords.txt");
 	}	
 	
 	public String scanFile()
 	{
 		try
 		{
-			Scanner myScanner = new Scanner(myFile);
+			myScanner = new Scanner(fileName);
 			line = myScanner.nextLine();
+			System.out.println(line);
 		}
+		
 		catch(FileNotFoundException fileName)
 		{
 			System.out.println("file not found");
 		}
-	
+		
 		return line;
 	}
 }

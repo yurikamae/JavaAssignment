@@ -4,23 +4,32 @@
 
 package com.JavaAssignment.code;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.JavaAssignment.code.ScreenGui;
-import com.JavaAssignment.code.SearchEngine;
 
 public class Control 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException
 	{
 		ScreenGui myGui = new ScreenGui("my search engine in java");
 		
-		SearchEngine s1 = new SearchEngine();
+		ArrayList<String> Search = new ArrayList<String>();
 		
-		ArrayList<SearchEngine> mySearch = new ArrayList<SearchEngine>();
+		Scanner myScanner = new Scanner(new File("searchwords.txt"));
 		
-		mySearch.add(s1);
+		//Opens + saves file to array list
+		while(myScanner.hasNextLine())
+		{
+			Search.add(myScanner.nextLine());
+		}
 		
-		System.out.println(mySearch);
+		for(String line : Search)
+		{
+			System.out.println(line); //prints to make sure code above works
+		}
 	}
 }

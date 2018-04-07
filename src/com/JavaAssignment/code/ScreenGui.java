@@ -1,6 +1,3 @@
-/*
- * This is the ScreenGui class which is responsible for displaying the GUI for the Search Engine
- */
 
 package com.JavaAssignment.code;
 
@@ -8,81 +5,96 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import javax.swing.JOptionPane;
 
 public class ScreenGui extends JFrame implements ActionListener
 {
 	//attributes
-	private JButton searchButton, historyButton, clearHistoryButton;
-	private JTextField searchBox; //this is where the text will be entered
-	private JTextArea searchResults; //this area will display search results
+	JButton searchButton, history, clearHistory; //buttons
+	JTextField searchBar; //area where user inputs search term
+	JTextArea searchResults, historyDisplay; //displays search results+history
 	
-	ArrayList<SearchEngine> Search = new ArrayList<SearchEngine>();
+	String searchTerm; //variable that will take input from searchBar and save it to searchResults+historyDisplay
 	
-	//constructors
+	public ArrayList<String> Search = new ArrayList<String>();
+	
+	//constructors (screen)
 	public ScreenGui(String title)
 	{
 		super(title);
-		setSize(400,500);
+		setSize(600,400);
 		setLayout(new FlowLayout());
 		
-		searchBox = new JTextField();
-		searchBox.setText("Enter search here");
+		searchBar = new JTextField();
+		searchBar.setText("I'm looking for...");
 		
 		searchButton = new JButton("Search");
-		historyButton = new JButton("Search History");
-		clearHistoryButton = new JButton("Clear History");
+		history = new JButton("Search History");
+		clearHistory = new JButton("Clear History");
+		
+		searchResults = new JTextArea(10,20);
+		historyDisplay = new JTextArea(10,20);
 		
 		//Listeners
-		add(searchBox);
-		searchBox.addActionListener(this);
+		add(searchBar);
+		searchBar.addActionListener(this);
 		
 		add(searchButton);
 		searchButton.addActionListener(this);
 		
-		add(historyButton);
-		historyButton.addActionListener(this);
+		add(history);
+		history.addActionListener(this);
 		
-		add(clearHistoryButton);
-		clearHistoryButton.addActionListener(this);
+		add(clearHistory);
+		clearHistory.addActionListener(this);
 		
 		add(searchResults);
+		add(historyDisplay);
 		
 		//Make screen visible
 		setVisible(true);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	//ActionListener method
-	/*@Override
-	public void actionPerformed(ActionEvent event)
+	public void actionPerformed(ActionEvent event) //different actions take place when user interacts with different elements(button, etc)
 	{
-		if(event.getSource() == searchButton) //this button will display search results
+		if(event.getSource() == searchBar)
 		{
-			//PART NOT FINISHED YET
-			//SearchEngine s1 = new SearchEngine(searchBox.getText());
-			//Search.add(s1);
-			//JOptionPane.showMessageDialog(this, "You searched for: " + s1);
-			//display search results
+			searchTerm = searchBar.getText();
 		}
-		else if(event.getSource() == historyButton) //this button will display search history
+		
+		else if(event.getSource() == searchButton)
 		{
-			for(SearchEngine element : Search)
-				searchResults.append(element.toString());
+			Scanner myScanner = null;
+			while(myScanner.hasNextLine())
+			{
+				if(searchTerm.equals(myScanner.nextLine().trim()))
+				{
+					System.out.println("Showing results for: " + this.searchTerm);
+			        break;
+			    }
+				else
+				{
+					System.out.println("No results found");
+			    }
+			 }
 		}
-		else if(event.getSource() == clearHistoryButton) //this button will clear the search history
+		
+		else if(event.getSource() == history)
 		{
-			searchResults.setText(null);
+			for(String element : Search)
+				historyDisplay.append(element.toString());
+		}
+		
+		else if(event.getSource() == clearHistory)
+		{
+			historyDisplay.setText(null);
 			Search.clear();
-		}*/
+		}
 	}
+}

@@ -40,7 +40,7 @@ public class ScreenGui extends JFrame implements ActionListener
 		searchResults = new JTextArea(10,20);
 		historyDisplay = new JTextArea(10,20);
 		
-		//Listeners
+		//Action Listeners
 		add(searchBar);
 		searchBar.addActionListener(this);
 		
@@ -56,6 +56,10 @@ public class ScreenGui extends JFrame implements ActionListener
 		add(searchResults);
 		add(historyDisplay);
 		
+		//Restricts user from editing the output
+		searchResults.setEditable(false);
+		historyDisplay.setEditable(false);
+		
 		//Make screen visible
 		setVisible(true);
 	}
@@ -63,13 +67,15 @@ public class ScreenGui extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent event) //different actions take place when user interacts with different elements(button, etc)
 	{
-		if(event.getSource() == searchBar)
+		/*if(event.getSource() == searchBar)
 		{
 			searchTerm = searchBar.getText();
-		}
+		}*/
 		
-		else if(event.getSource() == searchButton)
+		if(event.getSource() == searchButton)
 		{
+			searchTerm = searchBar.getText();
+			
 			Scanner myScanner = null;
 			while(myScanner.hasNextLine())
 			{

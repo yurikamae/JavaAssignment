@@ -10,21 +10,39 @@ import java.io.FileNotFoundException;
 public class FileReader
 {
 	File fileName;
-	File myFile; //global access
+	File myFile;
 	Scanner myScanner;
 	String line;
-		
-	public FileReader(File fileName)
-	{
-		this.fileName = fileName;
-	}
-		
+	static String searchTerm;
+	
+	//Code reference from ismailzd on Youtube: https://www.youtube.com/watch?v=lDqP5Y01ce0
 	public void openFile()
 	{
-		fileName = new File("searchwords.txt");
+		try
+		{
+			myScanner = new Scanner(new File("C:/Users/USE/eclipse-workspace/JavaAssignment/src/com/JavaAssignment/code/searchwords.txt"));
+			System.out.println("it works!");
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("doesn't work!");
+		}
 	}	
 	
-	public String scanFile()
+	public void readFile()
+	{
+		do
+		{
+			searchTerm = myScanner.next();
+		}
+		while(myScanner.hasNext());
+		System.out.println(searchTerm);
+		
+		myScanner.close();
+	}
+	//End of code reference from ismailzd on Youtube: https://www.youtube.com/watch?v=lDqP5Y01ce0
+	
+	/*public String scanFile()
 	{
 		try
 		{
@@ -39,5 +57,5 @@ public class FileReader
 		}
 		
 		return line;
-	}
+	}*/
 }

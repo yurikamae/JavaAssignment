@@ -1,5 +1,5 @@
 /*
- * This is the control class for my Java Assignment
+ * This is the control/main class for my Java Assignment
  */
 
 package com.JavaAssignment.code;
@@ -17,9 +17,16 @@ public class Control
 	{
 		ScreenGui myGui = new ScreenGui("my search engine in java");
 		
+		//Code reference from ismailzd on Youtube: https://www.youtube.com/watch?v=lDqP5Y01ce0
+		//FileReader f = new FileReader();
+		//f.openFile();
+		//f.readFile();
+		//end of code reference from ismailzd on Youtube: https://www.youtube.com/watch?v=lDqP5Y01ce0
+		
+		
 		ArrayList<String> Search = new ArrayList<String>();
 		
-		Scanner myScanner = new Scanner(new File("searchwords.txt"));
+		Scanner myScanner = new Scanner(new File("C:/Users/USE/eclipse-workspace/JavaAssignment/src/com/JavaAssignment/code/searchwords.txt"));
 		
 		//Opens + saves file to array list
 		while(myScanner.hasNextLine())

@@ -1,14 +1,18 @@
-
+/*
+ * This is the ScreenGui class which contains the GUI for my Search Engine.
+ */
 package com.JavaAssignment.code;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 
@@ -20,14 +24,16 @@ public class ScreenGui extends JFrame implements ActionListener
 	JTextArea searchResults, historyDisplay; //displays search results+history
 	
 	String searchTerm; //variable that will take input from searchBar and save it to searchResults+historyDisplay
+	static String fileName = "C:/Users/USE/eclipse-workspace/JavaAssignment/src/com/JavaAssignment/code/searchwords.txt";
 	
-	public ArrayList<String> Search = new ArrayList<String>();
+	public ArrayList<String> Search = new ArrayList<String>(); //Array that will store search history (historyDisplay)
+	public ArrayList<String> SearchWords = new ArrayList<String>(); //Text file content is stored into this array
 	
 	//constructors (screen)
 	public ScreenGui(String title)
 	{
 		super(title);
-		setSize(600,400);
+		setSize(500,300);
 		setLayout(new FlowLayout());
 		
 		searchBar = new JTextField();
@@ -67,40 +73,62 @@ public class ScreenGui extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent event) //different actions take place when user interacts with different elements(button, etc)
 	{
-		/*if(event.getSource() == searchBar)
-		{
-			searchTerm = searchBar.getText();
-		}*/
-		
+		//SEARCH BUTTON
 		if(event.getSource() == searchButton)
 		{
-			searchTerm = searchBar.getText();
+			searchTerm = searchBar.getText(); //takes the input from searchBar, assigns it to variable searchTerm and put it into array Search
+			Search.add(searchTerm);
+			//searchTerm.equals(myScanner.nextLine().trim())
 			
-			Scanner myScanner = null;
-			while(myScanner.hasNextLine())
+			for(String element1 : SearchWords)
+				searchResults.append(element1.toString() + "\n");
+			
+			if(SearchWords.contains(searchTerm))
 			{
-				if(searchTerm.equals(myScanner.nextLine().trim()))
-				{
-					System.out.println("Showing results for: " + this.searchTerm);
-			        break;
-			    }
-				else
-				{
-					System.out.println("No results found");
-			    }
-			 }
+				JOptionPane.showMessageDialog(this,searchTerm + "\nresults found: ");
+				System.out.print(SearchWords);
+			}
+			
+			else
+			{
+				JOptionPane.showMessageDialog(this,searchTerm + "\nshows no result. ");
+			}
 		}
 		
+		//SEARCH HISTORY BUTTON (Displays Search History)
 		else if(event.getSource() == history)
 		{
 			for(String element : Search)
-				historyDisplay.append(element.toString());
+				historyDisplay.append(element.toString() + "\n");
 		}
 		
+		//CLEAR HISTORY BUTTON
 		else if(event.getSource() == clearHistory)
 		{
 			historyDisplay.setText(null);
 			Search.clear();
 		}
+	}
+	
+	public static boolean compareInFile(String line) 
+	{
+	 
+	    File file = new File(fileName);
+	    try 
+	    {
+	        Scanner myScanner = new Scanner(file);
+	        while (myScanner.hasNextLine()) 
+	        {
+	            line = myScanner.nextLine();
+	            if (myScanner.equals(line)) 
+	            {
+	                return true;
+	            }
+	        }
+	    } 
+	    catch (Exception error) 
+	    {
+	    }
+	    return false;
 	}
 }

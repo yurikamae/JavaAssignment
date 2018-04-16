@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,13 +26,13 @@ public class ScreenGui extends JFrame implements ActionListener
 	JTextArea searchResults, historyDisplay; //displays search results+history
 	
 	String searchTerm; //variable that will take input from searchBar and save it to searchResults+historyDisplay
-	static String fileName = "C:/Users/USE/eclipse-workspace/JavaAssignment/src/com/JavaAssignment/code/searchwords.txt";
+	File fileName =  new File("C:/Users/USE/eclipse-workspace/JavaAssignment/searchwords.txt");
 	
 	public ArrayList<String> Search = new ArrayList<String>(); //Array that will store search history (historyDisplay)
 	public ArrayList<String> SearchWords = new ArrayList<String>(); //Text file content is stored into this array
 	
 	//constructors (screen)
-	public ScreenGui(String title)
+	public ScreenGui(String title) throws FileNotFoundException
 	{
 		super(title);
 		setSize(500,300);
@@ -68,6 +70,18 @@ public class ScreenGui extends JFrame implements ActionListener
 		
 		//Make screen visible
 		setVisible(true);
+		
+		FileReader fr = new FileReader(fileName);
+		Scanner scan = new Scanner (fr);
+		while(scan.hasNext())
+		{
+			SearchWords.add(scan.next());
+		}
+		
+		for (String element : SearchWords)
+		{
+			System.out.println(element);
+		}
 	}
 
 	@Override
@@ -78,15 +92,29 @@ public class ScreenGui extends JFrame implements ActionListener
 		{
 			searchTerm = searchBar.getText(); //takes the input from searchBar, assigns it to variable searchTerm and put it into array Search
 			Search.add(searchTerm);
-			//searchTerm.equals(myScanner.nextLine().trim())
-			
-			for(String element1 : SearchWords)
-				searchResults.append(element1.toString() + "\n");
 			
 			if(SearchWords.contains(searchTerm))
 			{
 				JOptionPane.showMessageDialog(this,searchTerm + "\nresults found: ");
-				System.out.print(SearchWords);
+		        Scanner in = null;
+				try 
+				{
+					in = new Scanner(fileName);
+				} 
+				catch (FileNotFoundException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				while(in.hasNextLine())
+				{
+				    String line=in.next();
+			    	searchResults.append(line + "\n");
+				    if(line.contains(searchTerm))
+				    { 
+				    	searchResults.setText(line);
+				    }
+				}
 			}
 			
 			else
@@ -108,27 +136,5 @@ public class ScreenGui extends JFrame implements ActionListener
 			historyDisplay.setText(null);
 			Search.clear();
 		}
-	}
-	
-	public static boolean compareInFile(String line) 
-	{
-	 
-	    File file = new File(fileName);
-	    try 
-	    {
-	        Scanner myScanner = new Scanner(file);
-	        while (myScanner.hasNextLine()) 
-	        {
-	            line = myScanner.nextLine();
-	            if (myScanner.equals(line)) 
-	            {
-	                return true;
-	            }
-	        }
-	    } 
-	    catch (Exception error) 
-	    {
-	    }
-	    return false;
 	}
 }

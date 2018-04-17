@@ -12,4 +12,5 @@ HOW the program works:
 - Search history can be displayed by clicking "search history" button
 - Search history can be deleted by clicking "clear history" button
 
+LINK to video: https://youtu.be/FPYaBb7uswQ
 

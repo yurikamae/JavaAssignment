@@ -52,23 +52,23 @@ public class ScreenGui extends JFrame implements ActionListener
 		//end of code ref: https://stackoverflow.com/questions/2715118/how-to-change-the-size-of-the-font-of-a-jlabel-to-take-the-maximum-size
 		col1.setForeground(Color.BLUE); //code ref: http://www.asjava.com/swing/set-jlabel-font-size-and-color/
 		
-		col2 = new JLabel();
+		col2 = new JLabel(); //Letter "i"
 		col2.setText("i");
 		col2.setFont(new Font("Serif", Font.PLAIN, 90));
 		col2.setForeground(Color.RED);
 		
-		col3 = new JLabel();
+		col3 = new JLabel(); //Letter "n"
 		col3.setText("n");
 		col3.setFont(new Font("Serif", Font.PLAIN, 90));
 		col3.setForeground(Color.YELLOW);
 		
-		col4 = new JLabel();
+		col4 = new JLabel(); //Letter "g"
 		col4.setText("g");
 		col4.setFont(new Font("Serif", Font.PLAIN, 90));
 		col4.setForeground(Color.BLUE);
 		
 		label2 = new JLabel();
-		label2.setText("                                                                        ");
+		label2.setText("                                                                        "); //to shift the position of the searchBar, etc.
 		
 		label3 = new JLabel();
 		label3.setText("                            ");
@@ -114,7 +114,7 @@ public class ScreenGui extends JFrame implements ActionListener
 		//Make screen visible
 		setVisible(true);
 		
-		FileReader fr = new FileReader(fileName);
+		FileReader fr = new FileReader(fileName); //Stores the textfile contents into arrayList SearchWords
 		Scanner scan = new Scanner (fr);
 		while(scan.hasNext())
 		{
@@ -123,7 +123,7 @@ public class ScreenGui extends JFrame implements ActionListener
 		
 		for (String element : SearchWords)
 		{
-			System.out.println(element);
+			System.out.println(element); //prints contents to make sure it works
 		}
 	}
 
@@ -134,6 +134,7 @@ public class ScreenGui extends JFrame implements ActionListener
 		if(event.getSource() == searchButton)
 		{
 			searchTerm = searchBar.getText(); //takes the input from searchBar, assigns it to variable searchTerm and put it into array Search
+			searchTerm = searchTerm.toLowerCase();
 			Search.add(searchTerm);
 			
 			if(SearchWords.contains(searchTerm))
@@ -156,7 +157,7 @@ public class ScreenGui extends JFrame implements ActionListener
 				
 				while(in.hasNext())
 				{
-				    String line=in.nextLine();
+				    String line = in.nextLine().toLowerCase();
 				    
 			    	if(line.contains(searchTerm))
 				    {
